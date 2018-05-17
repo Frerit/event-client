@@ -37,13 +37,13 @@ deployment:
      staging:
        branch: development
        codedeploy:
-         event-client:
+         event-front:
            application_root: /
            revision_location:
              revision_type: S3
              s3_location:
                bucket: event-front
                key_pattern: apps/event-client-{SHORT_COMMIT}-{BUILD_NUM}
-           region: us-east-1
-           deployment_group: Permicess3
+           region: us-east-2
+           deployment_group: developdev
            deployment_config: CodeDeployDefault.AllAtOnce
