@@ -33,14 +33,17 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-    deployment:
-      staging:
-        branch: development
-        codedeploy:
-          my-app:
-            deployment_group: Permicess3
-      production:
-        branch: master
-        codedeploy:
-          my-app:
-            deployment_group: Permicess3
+   deployment:
+     staging:
+       branch: development
+       codedeploy:
+         event-client:
+           application_root: /
+           revision_location:
+             revision_type: S3
+             s3_location:
+               bucket: event-front
+               key_pattern: apps/event-client-{SHORT_COMMIT}-{BUILD_NUM}
+           region: us-east-1
+           deployment_group: Permicess3
+           deployment_config: CodeDeployDefault.AllAtOnce
