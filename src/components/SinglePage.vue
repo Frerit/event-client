@@ -18,7 +18,7 @@
       </vs-tab>
       <vs-tab vs-label="Ingresar">
         <div class="con-tab-ejemplo">
-          Ayuda
+          <Login/>
         </div>
       </vs-tab>
       <vs-tab vs-label="Publica tu evento">
@@ -36,13 +36,15 @@
   import Actualy from '@/components/Actualy'
   import Eventos from '@/components/Eventos'
   import Footer from '@/components/Footer'
+  import Login from '@/components/Login'
     export default {
         name: "single-page",
         components:  {
           Banner,
           Actualy,
           Eventos,
-          Footer
+          Footer,
+          Login,
         }
     }
 </script>
@@ -58,6 +60,7 @@
       .tab-activo {
         background: white !important;
         border-radius: 0 !important;
+        list-style: none;
       }
       .tabtext {
         color: white;

@@ -23,20 +23,13 @@
 
       </vs-row>
     </div>
-
-
   </section>
 </template>
 
 <script>
-  import VsRow from "vuesax/src/layout/vsRow";
-  import VsCol from "vuesax/src/layout/vsCol";
-
   export default {
     name: "actualy",
     components: {
-      VsCol,
-      VsRow
     },
   }
 </script>

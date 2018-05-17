@@ -3,34 +3,32 @@
     <div class="container">
       <vs-row class="menu-categoris" vs-type="flex" vs-justify="center" vs-w="12">
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1" >
-          <vs-button vs-type="danger-line-down">Conciertos</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="selCategory(1)">Conciertos</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Rumbas</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 2">Rumbas</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Festivales</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 3">Festivales</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Academicos</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 4">Academicos</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="2">
-          <vs-button vs-type="danger-line-down">Al aire libre y deportes</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 5">Al aire libre y deportes</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Negocios</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 6">Negocios</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Teatro</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 7">Teatro</vs-button>
         </vs-col>
         <vs-col vs-type="flex" vs-align="center" vs-justify="center" vs-w="1">
-          <vs-button vs-type="danger-line-down">Cultura</vs-button>
+          <vs-button vs-type="danger-line-down" v-on:click="category = 8">Cultura</vs-button>
         </vs-col>
-
       </vs-row>
       <vs-row>
-        <vs-col :key="index" v-for="even, index in eventos"  vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
-
+        <vs-col :key="index" v-for="even, index in dataEventos"  vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
           <div class="example-2 cards">
             <div class="wrapper" :style="{ backgroundImage:'url(' + even.imagen + ')' }">
               <div class="header">
@@ -66,17 +64,15 @@
 </template>
 
 <script>
-  import VsRow from "vuesax/src/layout/vsRow";
-  import VsCol from "vuesax/src/layout/vsCol";
 
   export default {
-    components: {
-      VsCol,
-      VsRow},
     name: "eventos",
     data() {
       return {
-        eventos: [
+        category: null,
+        evento: null,
+        num: [1, 2, 3, 4, 4],
+        dataEventos: [
           {
             name: 'Selecta at @ArmandoRecords',
             imagen: 'https://hayevento.com/imgs/b43e598d4c90cf4633259cc32ddcd1cd.jpg',
@@ -87,6 +83,7 @@
             hora: '7:00 PM - 3:00 AM',
             likes: 2,
             coments: 20,
+            category: 1
           },
           {
             name: 'JORGE DREXLER SALVA VIDAS DE HIELO BOGOTÁ',
@@ -98,6 +95,7 @@
             hora: '7:00 PM - 3:00 AM',
             likes: 2,
             coments: 20,
+            category: 2
           },
           {
             name: 'Kinder Malo x Pimp Flaco',
@@ -109,6 +107,7 @@
             hora: '7:00 PM - 3:00 AM',
             likes: 20,
             coments: 20,
+            category: 1
           },
           {
             name: 'Juantxo Skalari & La Rude Band en Colombia',
@@ -120,6 +119,7 @@
             hora: '7:00 PM - 3:00 AM',
             likes: 20,
             coments: 20,
+            category: 3
           },
           {
             name: 'Tour Fantasmas XXII',
@@ -131,6 +131,7 @@
             hora: '7:30 PM - 8:30 PM',
             likes: 20,
             coments: 20,
+            category: 5
           },
           {
             name: 'Edición dulce pecado El Fabuloso',
@@ -142,11 +143,90 @@
             hora: '9:00 PM - 3:30 AM',
             likes: 20,
             coments: 20,
+            category: 5
+          },
+          {
+            name: 'ME ERICE BARRANQUILLA AMPARO GRISALES',
+            imagen: 'https://hayevento.com/imgs/05dba2d33843765bc5b43d22b00e94e4.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 6
+          },
+          {
+            name: 'CuleFiesta',
+            imagen: 'https://hayevento.com/imgs/81bff250614d9b3a4282472b49796bfb.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 2
+          },
+          {
+            name: 'Carmen (Ópera)',
+            imagen: 'https://hayevento.com/imgs/2d81e643bc58d2d6d7231a923242f462.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 3
+          },
+          {
+            name: 'Señor Loop en Bogotá (Armando Records)',
+            imagen: 'https://hayevento.com/imgs/8d147191a27da1637c625520e0c1c150.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 4
+          },
+          {
+            name: 'Concierto: ¡Complaceme! | Eduardo Moreno & Okocán',
+            imagen: 'https://hayevento.com/imgs/d69004196714768125dc2b34c4fb2fa4.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 5
+          },
+          {
+            name: 'Noches del Pub / Animal Party',
+            imagen: 'https://hayevento.com/imgs/97b2f974ca5015d85f4bca108374d6b0.jpg',
+            place: 'Plaza de Bolívar - Cra. 7 #11-10',
+            ubicacion: 'Bogota',
+            date: { day:'05',month:'ABR', year:'2018'},
+            fecha: '05 Abril al 06 Abril',
+            hora: '9:00 PM - 3:30 AM',
+            likes: 20,
+            coments: 20,
+            category: 1
           }
-        ]
+        ],
+
+      }
+    },
+    methods: {
+      selCategory: (num) => {
+       var data = this.dataEventos.indexOf(num)
+       console.log(data)
       }
     }
-
   }
 </script>
 
