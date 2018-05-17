@@ -33,4 +33,14 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-
+    deployment:
+      staging:
+        branch: development
+        codedeploy:
+          my-app:
+            deployment_group: Permicess3
+      production:
+        branch: master
+        codedeploy:
+          my-app:
+            deployment_group: Permicess3
