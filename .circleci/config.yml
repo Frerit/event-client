@@ -34,16 +34,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
 deployment:
-     staging:
-       branch: development
-       codedeploy:
-         event-front:
-           application_root: /
-           revision_location:
-             revision_type: S3
-             s3_location:
-               bucket: event-front
-               key_pattern: apps/event-client-{SHORT_COMMIT}-{BUILD_NUM}
-           region: us-east-2
-           deployment_group: developdev
-           deployment_config: CodeDeployDefault.AllAtOnce
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync /static s3://event-front.s3-website-us-east-1.amazonaws.com --delete
