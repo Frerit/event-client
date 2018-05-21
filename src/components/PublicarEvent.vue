@@ -19,7 +19,7 @@
                         vs-success-text="Field is valid"
                         vs-danger-text="Field must have at least 5 characters"
                         :vs-validation-function="(value) => value.length > 1"
-                        vs-type="custom" v-model="eventos.name"/>
+                        vs-type="custom" v-model="eventos.title"/>
                     </div>
                   </vs-col>
                 </vs-row>
@@ -86,18 +86,21 @@
                           <vs-row vs-align="flex-start">
                             <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="12" >
                               <vs-select
+                                :vs-valid.sync="validos.city"
+                                :vs-validation-function="validar()"
                                 class="vs-w-12"
                                 label="Ciudad:"
-                                v-model="addre.city"
-                                :options="citys" :disabled="addre.depart == 0" />
+                                v-model="eventos.city"
+                                :options="citys" :disabled="eventos.depart == 0" />
                             </vs-col>
                             <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="12" >
                               <label for="place" class="labelinpu">Lugar:</label>
                               <vs-input id="place"
-                                        :vs-valid.sync="validos.name"
-                                        vs-success-text="Correo Valido"
-                                        vs-danger-text=""
-                                        vs-type="text" v-model="addre.place"/>
+                                        :vs-valid.sync="validos.place"
+                                        :vs-validation-function="(value) => value.length > 2"
+                                        vs-success-text="Lugar Valido"
+                                        vs-danger-text="Falta el Luega"
+                                        vs-type="text" v-model="eventos.place"/>
                             </vs-col>
                           </vs-row>
                         </li>
@@ -105,10 +108,11 @@
                           <vs-row vs-align="flex-start">
                           <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" >
                             <vs-input class="direccion"
-                                      :vs-valid.sync="validos.name"
+                                      :vs-valid.sync="validos.addres"
+                                      :vs-validation-function="(value) => value.length > 4"
                                       vs-success-text="Correo Valido"
                                       vs-danger-text=""
-                                      vs-type="text" vs-label-placeholder="Direccion" v-model="addre.addres"/>
+                                      vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.address"/>
                           </vs-col>
                         </vs-row></li>
 
@@ -123,10 +127,11 @@
                   <vs-col vs-type="block" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" >
                    <div class="con-input con-about">
                        <textarea class=" vs-input about"
-                                 :vs-valid.sync="validos.name"
+                                 :vs-valid.sync="validos.about"
+                                 :vs-validation-function="(value) => value.length > 4"
                                  vs-success-text="Correo Valido"
                                  vs-danger-text=""
-                                 vs-type="text" vs-label-placeholder="Direccion" v-model="eventabout"/>
+                                 vs-type="text" vs-label-placeholder="Direccion" v-model="eventos.description"/>
                    </div>
                   </vs-col>
                 </vs-row>
@@ -140,7 +145,7 @@
                   <vs-card-body>
                     <vs-row vs-align="flex-start">
                       <vs-col vs-type="block" vs-justify="left" vs-align="left" vs-lg="6" vs-sm="12" >
-                        <vs-radio vs-color="danger" v-model="costs" vs-value="Free" class="cheekfree">$0.0 USD / <small>Event Free</small></vs-radio>
+                        <vs-radio vs-color="danger" v-model="eventos.cost" vs-value="0" class="cheekfree">$0.0 USD / <small>Event Free</small></vs-radio>
                       </vs-col>
                     </vs-row>
 
@@ -155,7 +160,7 @@
                     <vs-row vs-align="flex-start">
 
                       <vs-col vs-type="block" vs-justify="left" vs-align="left" vs-lg="3" vs-sm="12" >
-                        <vs-radio vs-color="danger" v-model="costs" vs-value="Pago">Credit Card</vs-radio>
+                        <vs-radio vs-color="danger" v-model="eventos.cost" vs-value="100">Credit Card</vs-radio>
                       </vs-col>
                       <vs-col class="left" vs-type="block" vs-justify="left" vs-align="left" vs-lg="6" vs-sm="12" >
                       <span>Safe money transfer using your bank account. Visa, Maestro, Discover, American Express.</span>
@@ -380,16 +385,26 @@
         eventabout: '',
 
         eventos: {
-          name: '',
-          county:'',
+          title: '',
+          description: '',
+          longitude: '',
+          latitude: '',
+          date:'',
+          active: 1,
+          idUser: 1,
+          idEventType: 1,
+          publishedDate: Date.now(),
+          publishedActive: true,
+          creationDate: Date.now(),
+          updateDate: Date.now(),
+          tagIds: [],
+          county: '',
           depart:'',
           type:'',
-          date:'',
           city:'',
           place: '',
-          addres: '',
-          about: '',
-          cost: 'Free'
+          address: '',
+          cost: 0
         },
 
         addre: {
@@ -421,8 +436,22 @@
       }
     },
     methods: {
-      onComplete: function() {
-        alert('Yay. Done!');
+      onComplete: () => {
+        var datasend = JSON.stringify(this.eventos)
+
+        console.log(datasend)
+        axios({
+          method: 'post',
+          url: 'http://localhost:8080/event.create',
+          data: datasend
+        })
+          .then(response => {
+
+           console.log(response)
+          })
+          .catch(e => {
+            console.log(e)
+          })
       },
       validateFirstStep() {
         return new Promise((resolve, reject) => {
