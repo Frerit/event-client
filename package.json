@@ -10,10 +10,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.3.9",
     "jquery": "^3.3.1",
     "semantic-ui-transition": "^2.3.1",
     "semantic-ui-vue": "^0.2.6",
     "vue": "^2.5.2",
+    "vue-form-wizard": "^0.8.4",
     "vue-router": "^3.0.1",
     "vuesax": "^3.0.17"
   },

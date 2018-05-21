@@ -23,7 +23,7 @@
       </vs-tab>
       <vs-tab vs-label="Publica tu evento">
         <div class="con-tab-ejemplo">
-          Publica tu evento
+          <PublicarEvento/>
         </div>
       </vs-tab>
     </vs-tabs>
@@ -37,6 +37,7 @@
   import Eventos from '@/components/Eventos'
   import Footer from '@/components/Footer'
   import Login from '@/components/Login'
+  import PublicarEvento from '@/components/PublicarEvent'
     export default {
         name: "single-page",
         components:  {
@@ -45,6 +46,7 @@
           Eventos,
           Footer,
           Login,
+          PublicarEvento
         }
     }
 </script>
@@ -57,6 +59,7 @@
   .nav-home {
     .ul-tabs {
       justify-content: flex-end;
+      list-style: none;
       .tab-activo {
         background: white !important;
         border-radius: 0 !important;
